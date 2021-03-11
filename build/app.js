@@ -9,7 +9,7 @@ var server = express();
 var PORT = 3000;
 var api_client = new index_1.default();
 server.get('/', function (req, res) {
-    res.send(api_client.print_hello());
+    res.send(api_client.get_track_info("believe", "cher"));
 });
 server.listen(PORT, function () {
     console.log("The server is running on port " + PORT);

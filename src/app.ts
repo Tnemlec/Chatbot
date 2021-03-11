@@ -8,7 +8,7 @@ const PORT = 3000
 let api_client = new lastfm()
 
 server.get('/', (req, res) => {
-    res.send(api_client.print_hello())
+    res.send(api_client.get_track_info("believe", "cher"))
 })
 
 server.listen(PORT, () => {
