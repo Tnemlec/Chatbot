@@ -4,7 +4,7 @@ export default class LastFm {
     apiKey: string;
 
     constructor() {
-        this.apiKey = "TODO";
+        this.apiKey = process.env.LASTFM_KEY || "";
     }
     
     public get_track_info(name: string, artist: string): string {
