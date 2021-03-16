@@ -1,8 +1,10 @@
-export default class FBManager{
-    pageAccessToken: string;
-    VerifyToken: string;
+import {Request, Response} from 'express';
 
-    constructor(pageAccessToken: string, VerifyToken: string){
+export default class FBManager{
+    pageAccessToken: any;
+    VerifyToken: any;
+
+    constructor(pageAccessToken: any, VerifyToken: any){
         if(pageAccessToken == null || VerifyToken == null){
             throw new Error("Null argument in FBManager")
         }else{
@@ -11,7 +13,7 @@ export default class FBManager{
         }
     }
 
-    registerHook(req: any, res: any){
+    registerHook(req: Request, res: Response){
         console.log(typeof(req))
         console.log(typeof(res))
         const params = req.query

@@ -13,11 +13,11 @@ if(server.settings.env === "development"){
     }
 }
 
-//let fb_client = new FBManager();
+let fb_client = new FBManager(process.env.PAGE_ACCESS_TOKEN, process.env.VERIFY_TOKEN);
 let api_client = new lastfm();
 
-server.get('/', async (req, res) => {
-    res.send(await api_client.get_top_3("cher"));
+server.get('/', (req, res) => {
+    fb_client.registerHook(req, res);
 });
 
 server.listen(PORT, () => {
