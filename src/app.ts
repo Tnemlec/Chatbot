@@ -14,10 +14,11 @@ if(server.settings.env === "development"){
     }
 }
 
-//let fb_client = new FBManager();
+let fb_client = new FBManager(process.env.PAGE_ACCESS_TOKEN, process.env.VERIFY_TOKEN);
 let api_client = new lastfm();
 
 server.get('/', (req, res) => {
+    fb_client.registerHook(req, res);
 });
 
 server.listen(PORT, () => {
