@@ -1,4 +1,5 @@
 import {Request, Response} from 'express';
+import axios from 'axios';
 
 export default class FBManager{
     pageAccessToken: any;
@@ -14,8 +15,6 @@ export default class FBManager{
     }
 
     registerHook(req: Request, res: Response){
-        console.log(typeof(req))
-        console.log(typeof(res))
         const params = req.query
         const mode = params['hub.mode']
         const token = params['hub.verify_token']
@@ -31,5 +30,40 @@ export default class FBManager{
         } catch (e){
             console.log(e)
         }
+    }
+
+    getIncommingData(req: Request, res: Response, callback: Function){
+        res.sendStatus(200)
+        if(req.body.object == 'page' && req.body.entry){
+            let data = req.body
+            data.entry.forEach((entry: any) => {
+                entry.messaging.forEach((messageObj: any) => {
+                    return callback(messageObj)
+                });
+            });
+        }
+    }
+
+    sendMessage(payload: any){
+        console.log(payload)
+        return new Promise((resolve, reject) => {
+            axios.post('https://graph.facebook.com/v9.0/me/messages?access_token=' + this.pageAccessToken, payload).then(response => {
+                resolve({
+                    mid: response.data.message_id
+                })
+            }).catch(error => {
+                console.log(error.request)
+                reject(error)
+            })
+        })
+    }
+
+    sendTxt(id: string, message: string, messaging_type = 'RESPONSE'){
+        let obj = {
+            messaging_type,
+            recipient: {id},
+            message: {text: message}
+        }
+        return this.sendMessage(obj)
     }
 }
