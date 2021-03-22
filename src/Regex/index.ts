@@ -1,8 +1,8 @@
 import pattern from './pattern';
 import xregexp from 'xregexp';
 
-import Track from '../lastfm/track';
-import LastFm from '../lastfm/index';
+import Track from '../LastFM/track';
+import LastFm from '../LastFM/index';
 
 export default class PatternHandler{
     api_client: LastFm;

@@ -1,5 +1,5 @@
 import express from 'express';
-import lastfm from './lastfm/index';
+import lastfm from './LastFM/index';
 import FBManager from './FBManager/index';
 import dotenv from 'dotenv';
 import PatternHandler from './Regex/index'
@@ -20,6 +20,18 @@ let api_client = new lastfm();
 let pattern_client = new PatternHandler(api_client)
 
 server.use(express.json())
+
+server.get('/test', async (req, res) => {
+    let names: string[] = await api_client.search_artists("wola");
+    let result: string = "<ul>";
+
+    names.forEach((name: string) => {
+        result += `<li>${name}</li>`;
+    });
+
+    result+="</ul>";
+    res.send(result);
+});
 
 server.get('/', async (req, res) => {
     // let tracks: Track[] = await api_client.get_top_3("cher");

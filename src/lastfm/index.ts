@@ -8,14 +8,36 @@ export default class LastFm {
         this.apiKey = process.env.LASTFM_KEY ?? '';
     }
 
-    public async get_top_3(artiste_name: string): Promise<Track[]> {
-        let data: any = await this.make_request('artist.gettoptracks', {artist: artiste_name, limit: 3});
+    public async get_top(artiste_name: string, n = 3): Promise<Track[]> {
+        let data: any = await this.make_request('artist.gettoptracks', { artist: artiste_name, limit: n });
         let tracks: Track[] = [];
 
         data.toptracks.track.forEach((el: any) => {
             tracks.push(new Track(el.name, el.artist.name));
         });
-        
+
+        return tracks;
+    }
+
+    public async search_artists(name: string, n=3): Promise<string[]> {
+        let data: any = await this.make_request('artist.search', {artist: name, limit: n});
+        let names: string[] = [];
+
+        data.results.artistmatches.artist.forEach((el: any) => {
+            names.push(el.name);
+        });
+
+        return names;
+    }
+
+    public async search_tracks(name: string, n = 3): Promise<Track[]> {
+        let data: any = await this.make_request('track.search', {track: name, limit: n});
+        let tracks: Track[] = [];
+
+        data.results.trackmatches.track.forEach((el: any) => {
+            tracks.push(new Track(el.name, el.artist));
+        });
+
         return tracks;
     }
 
