@@ -3,7 +3,7 @@ import lastfm from './LastFM/index';
 import FBManager from './FBManager/index';
 import dotenv from 'dotenv';
 import PatternHandler from './Regex/index'
-import Track from './lastfm/track';
+import Track from './LastFM/track';
 
 const server = express();
 const PORT = 3000;

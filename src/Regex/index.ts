@@ -1,8 +1,8 @@
 import pattern from './pattern';
 import xregexp from 'xregexp';
 
-import Track from '../LastFM/track';
 import LastFm from '../LastFM/index';
+import Track from '../LastFM/track';
 
 export default class PatternHandler{
     api_client: LastFm;
@@ -39,14 +39,37 @@ export default class PatternHandler{
                 return 'See you later ! 🖐'
                 break;
 
-            case "get_top_artist":
-                let tracks: Track[] = await this.api_client.get_top_3("cher");
+            case "get_n_top_songs":
+                let answer = ''
+                let top_n = null;
+                let tracks: Track[];
+                if(entities[1]){
+                    top_n = parseInt(entities[1])
+                }
+                let artist_name = entities[2]
+                artist_name = artist_name.trim()
+                if(top_n != 0 && top_n != null){
+                    tracks = await this.api_client.get_top(artist_name, top_n);
+                }
+                else{
+                    tracks = await this.api_client.get_top(artist_name);
+                }
                 let result: string = "";
 
+                let i = 0
                 tracks.forEach((track: Track) => {
-                    result += `${track.name}|||`;
+                    i+=1
+                    result += `${i} - ${track.name}\n`;
                 });
-                return "Here is the top 3 artists\n" + result
+
+                if(top_n != 0 && top_n != null){
+                    answer = `Here are the top ${top_n} songs from ${artist_name}\n${result}`
+                }
+                else{
+                    answer = `Here are the top 3 songs from ${artist_name}\n${result}`
+                }
+
+                return answer
                 break;
         
             default:

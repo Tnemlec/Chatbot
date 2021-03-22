@@ -5,8 +5,8 @@ const patternDict = [{
     pattern:'\\b(bye|exit)\\b',
     intent: 'exit'
     },{
-    pattern: 'top ([0-9]) tracks?',
-    intent: 'get_top_artist'
+    pattern: '([0-9])? best songs from ([^?]*) ?',
+    intent: 'get_n_top_songs'
     }
 ]
 
