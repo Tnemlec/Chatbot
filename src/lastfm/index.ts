@@ -46,6 +46,11 @@ export default class LastFm {
         return new Track(data.track.name, data.track.artist.name);
     }
 
+    public async get_track_info_tag(name: string, artist: string): Promise<any> {
+        let data = await this.make_request('track.getInfo', { artist: artist, track: name });
+        return data.track
+    }
+
     private async make_request(method: string, parameters: object): Promise<any> {
         let resp = await axios.get(`http://ws.audioscrobbler.com/2.0/?method=${method}&api_key=${this.apiKey}&format=json`, { params: parameters });
         return resp.data;

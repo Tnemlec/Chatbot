@@ -4,6 +4,8 @@ import xregexp from 'xregexp';
 import LastFm from '../LastFM/index';
 import Track from '../LastFM/track';
 
+import fs from 'fs'
+
 export default class PatternHandler{
     api_client: LastFm;
 
@@ -11,14 +13,14 @@ export default class PatternHandler{
         this.api_client = api_client;
     }
 
-    async matchPattern(message: any){
+    async matchPattern(message: any, sender_id: any){
         let found = pattern.find(item => {
             if(xregexp.test(message.text, xregexp(item.pattern, 'i'))){
                 return true
             }
         })
         if(found){
-            return await this.getResponse(found.intent, this.createEntities(message.text, found.pattern))
+            return await this.getResponse(found.intent, this.createEntities(message.text, found.pattern), sender_id)
         }
         else{
             return "Sorry I didn't understand 🤷‍♂️"
@@ -29,7 +31,32 @@ export default class PatternHandler{
         return xregexp.exec(message , xregexp(pattern,"i"))
     }
 
-    async getResponse(intent: string, entities: any){
+    addToDB(tracks_info: any, score: number, users_db: any, id: any){
+        let tags_array: Array<string> = [];
+        tracks_info.toptags.tag.forEach((tag: any)=> {
+            if(tag.name != tracks_info.artist.name){
+                tags_array.push(tag.name)
+            }
+        });
+        users_db[id].push({
+            track_name: tracks_info.name,
+            artist_name: tracks_info.artist.name,
+            score: score,
+            tags: tags_array
+        })
+        fs.writeFileSync('./src/userdatabase.json', JSON.stringify(users_db))
+    }
+
+    alreadyIn(id: string, users_db: any, song_name: string, artist: string){
+        for(let i = 0; i < users_db[id].length; i++){
+            if(users_db[id][i].track_name == song_name && users_db[id][i].artist_name == artist){
+                return true
+            }
+        }
+        return false
+    }
+
+    async getResponse(intent: string, entities: any, sender_id: any){
         switch (intent) {
             case "salutation":
                 return 'Hey 👋'
@@ -72,6 +99,47 @@ export default class PatternHandler{
                 return answer
                 break;
         
+            case 'add_track_to_mid':
+                //Read user file
+                let data = fs.readFileSync('./src/userdatabase.json')                     
+                let users_db = JSON.parse(data.toString())
+                //Check if user is already in database
+                let song_name = entities[1]
+                let artist = entities[2]
+                if(users_db[sender_id]){
+                    console.log('User exist')
+                }
+                else{
+                    console.log('User does not exist')
+                    users_db[sender_id] = []
+                }
+
+                //Let's now find the user track info
+                if(song_name && artist && song_name != '' && artist != ''){
+                    if(entities[3] && parseFloat(entities[3]) <= 10 && parseFloat(entities[3]) >= 0){
+                        let track_info = await this.api_client.get_track_info_tag(song_name, artist)
+                        if(track_info){
+                            if(!this.alreadyIn(sender_id, users_db, track_info.name, track_info.artist.name)){
+                                this.addToDB(track_info, parseFloat(entities[3]), users_db, sender_id)
+                                return 'Successfully added to your library 👍'
+                            }
+                            else{
+                                return 'This song is already in your library 😉'
+                            }
+                        }
+                        else{
+                            return "Sorry I couldn't find any result.. 🤷‍♂️"
+                        }                        
+                    }
+                    else{
+                        return "Sorry, the score must be between 0 and 10 😥"
+                    }
+                }
+                else{
+                    return "Sorry I believe this is a wrong song name or artist name 🤷‍♂️"
+                }
+                break;
+            
             default:
                 return "Sorry I didn't understand 🤷‍♂️"
                 break;

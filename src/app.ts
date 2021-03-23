@@ -50,7 +50,7 @@ server.post('/', (req, res) => {
     fb_client.getIncommingData(req, res, async (data: any) => {
         console.log(data)
         //Determine the message pattern
-        let response = await pattern_client.matchPattern(data.message)
+        let response = await pattern_client.matchPattern(data.message, data.sender.id)
         if(response){
             fb_client.sendTxt(data.sender.id, response).then(mid => {
                 console.log(mid)
