@@ -10,7 +10,15 @@ const patternDict = [{
     },{
         pattern: 'add ([^-]*) - ([^-]*) - ([0-9]*)',
         intent: 'add_track_to_mid'
-    }
-]
+    },{
+        pattern: '(?<number>\\d*).*(tracks?|songs?|musics?).*(with|contains?)\\s(?<name>.*)',
+        intent: 'search_songs'
+    }, {
+        pattern: '(?<number>\\d*).*(creators?|artists?).*(with|contains?)\\s(?<name>.*)',
+        intent: 'search_artists'
+    },{
+        pattern: 'add ([^-]*) - ([^-]*) - ([0-9]*)',
+        intent: 'add_track_to_mid'
+}]
 
 export default patternDict;
