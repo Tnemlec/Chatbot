@@ -19,6 +19,9 @@ const patternDict = [{
     },{
         pattern: 'add ([^-]*) - ([^-]*) - ([0-9]*)',
         intent: 'add_track_to_mid'
+    },{
+        pattern: 'recommand',
+        intent: 'recommand_a_song'
 }]
 
 export default patternDict;

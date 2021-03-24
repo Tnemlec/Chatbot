@@ -5,7 +5,7 @@ import math
 
 app = Flask(__name__)
 
-@app.route('/api/recommand', methods=['GET'])
+@app.route('/api/recommand', methods=['POST'])
 def index():
     #Check if all necessary data has been passed on
     try:

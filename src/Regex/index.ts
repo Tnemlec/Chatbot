@@ -4,7 +4,8 @@ import xregexp from 'xregexp';
 import LastFm from '../LastFM/index';
 import Track from '../LastFM/track';
 
-import fs from 'fs'
+import fs, { readFile } from 'fs'
+import axios, { AxiosResponse } from 'axios';
 
 export default class PatternHandler{
     api_client: LastFm;
@@ -157,8 +158,35 @@ export default class PatternHandler{
                 }
                 break;
             
+            case 'recommand_a_song':
+                //Read user file to see if enough tracks, let'say minimum 5 songs
+                data = fs.readFileSync('./src/userdatabase.json')                     
+                users_db = JSON.parse(data.toString())
+                let enough_songs = false
+                if(users_db[sender_id]){
+                    if(users_db[sender_id].length >= 5){
+                        enough_songs = true
+                    }
+                }
+
+                if(enough_songs){
+                    //Call the API
+                    let res = await axios.post('http://localhost:8000/api/recommand', {user_id: sender_id})
+                    let answer = 'I can recommand you:\n'
+                    i = 0
+                    Object.keys(res.data['recommandation']).forEach((key: string) => {
+                        i+=1
+                        song_name = key.split('|')[0]
+                        artist_name = key.split('|')[1]
+                        answer += `${i} - ${song_name} by ${artist_name} with a confidence of ${res.data['recommandation'][key] * 100}%\n`
+                    })
+                    return answer
+                }
+                else{
+                    return "You don't have enough songs in your library, at least 5.\nTry: Add <song's name> - <artist name> - <score: 0-10>"
+                }
             default:
-                return "Sorry I didn't understand 🤷‍♂️";
+                return "Sorry something went wrong"
         }
     }
 }
