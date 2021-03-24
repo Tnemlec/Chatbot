@@ -93,6 +93,7 @@ export default class PatternHandler{
                 answer = `Here are the top ${top_n != 0 && top_n != null ? top_n : 3} songs from ${artist_name}\n${result}`;
 
                 return answer;
+            
             case "search_songs":
                 number = entities.number ?? 3;
                 name = entities.name;
