@@ -22,7 +22,7 @@ let pattern_client = new PatternHandler(api_client)
 server.use(express.json())
 
 server.get('/test', async (req, res) => {
-    let names: string[] = await api_client.search_artists("wola");
+    let names: string[] = await api_client.search_artists("mister v");
     let result: string = "<ul>";
 
     names.forEach((name: string) => {

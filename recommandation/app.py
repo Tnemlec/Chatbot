@@ -20,7 +20,10 @@ def index():
     
     if(user_id and user_id != ''):
         recommandation = recommand(user_id, int(n))
-        return json.dumps({'recommandation':recommandation}), 200, {'ContentType':'application/json'} 
+        if(recommandation):
+            return json.dumps({'recommandation':recommandation}), 200, {'ContentType':'application/json'} 
+        else:
+            return json.dumps({'Error': 'Songs with no tags provided'}), 400, {'ContentType':'application/json'} 
     else:
         return 'Bad request', 400
 
@@ -103,6 +106,9 @@ def recommand(user_id, n):
         i+=1
     user = user.reset_index(drop=True)
     
+    if(len(user) == 0):
+        return False
+
     #Compute user preferance based on what he is listening to
     user_profile = userpreference(user, all_genre)
 
@@ -113,14 +119,14 @@ def recommand(user_id, n):
     # We store song name and artist name paired with their score
     song_name = list(song_unlistened['track_name'])
     song_artist = list(song_unlistened['artist_name'])
-    #Get score using the cosine distance
 
+    #Get score using the cosine distance
     user_vector_squared = square(user_profile)
     scores = songs.apply(lambda x: cosine(user_profile, user_vector_squared, x[3:]), axis = 1)
     
     #Store it in dict
     songsScores = dict()
-    for i in range(len(scores)):
+    for i in range(len(song_name)):
         songsScores[str(song_name[i]) + '|' + str(song_artist[i])] = scores[i]
         
     #Sort dictionnary

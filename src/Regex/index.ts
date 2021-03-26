@@ -107,9 +107,9 @@ export default class PatternHandler{
                 return `Here are the ${number} artists searched:\n${artists.join('\n')}`;
 
             case "search_artists":
-                number = entities.number ?? 3;
-                name = entities.name;
-                if (name)
+                number = entities.groups.number || 3;
+                name = entities.groups.name;
+                if (!name)
                     return "Sorry, but the name is empty 🤷‍♂️";
 
                 const songs: Track[] = await this.api_client.search_tracks(name, number);
@@ -171,7 +171,13 @@ export default class PatternHandler{
 
                 if(enough_songs){
                     //Call the API
-                    let res = await axios.post('http://localhost:8000/api/recommand', {user_id: sender_id})
+                    let res: AxiosResponse;
+                    try{
+                        res = await axios.post('http://localhost:8000/api/recommand', {user_id: sender_id})
+                    }
+                    catch{
+                        return "Sorry, your songs doesn't have enough tags 😌"
+                    }
                     let answer = 'I can recommand you:\n'
                     i = 0
                     Object.keys(res.data['recommandation']).forEach((key: string) => {

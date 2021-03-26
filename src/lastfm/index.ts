@@ -22,7 +22,7 @@ export default class LastFm {
     public async search_artists(name: string, n=3): Promise<string[]> {
         let data: any = await this.make_request('artist.search', {artist: name, limit: n});
         let names: string[] = [];
-
+        console.log(data)
         data.results.artistmatches.artist.forEach((el: any) => {
             names.push(el.name);
         });
