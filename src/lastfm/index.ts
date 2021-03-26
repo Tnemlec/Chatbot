@@ -48,7 +48,7 @@ export default class LastFm {
 
     public async get_track_info_tag(name: string, artist: string): Promise<any> {
         let data = await this.make_request('track.getInfo', { artist: artist, track: name });
-        return data.track
+        return data.track;
     }
 
     private async make_request(method: string, parameters: object): Promise<any> {

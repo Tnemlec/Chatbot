@@ -95,27 +95,27 @@ export default class PatternHandler{
 
                 return answer;
             
-            case "search_songs":
-                number = entities.number ?? 3;
-                name = entities.name;
-                if (name)
-                    return "Sorry, but the name is empty 🤷‍♂️";
-
-                const artists: string[] = await this.api_client.search_artists(name, number);
-                artists.map((value, index) => `${index}.${value}`);
-
-                return `Here are the ${number} artists searched:\n${artists.join('\n')}`;
-
             case "search_artists":
                 number = entities.groups.number || 3;
                 name = entities.groups.name;
                 if (!name)
                     return "Sorry, but the name is empty 🤷‍♂️";
 
-                const songs: Track[] = await this.api_client.search_tracks(name, number);
-                songs.map((value, index) => `${index}.${value}`);
+                let artists: string[] = await this.api_client.search_artists(name, number);
+                artists = artists.map((value, index) => `${index+1}. ${value}`);
 
-                return `Here are the ${number} songs searched:\n${songs.join('\n')}`;
+                return `Here are the ${number} artists found:\n${artists.join('\n')}`;
+
+            case "search_songs":
+                number = entities.groups.number || 3;
+                name = entities.groups.name;
+                if (!name)
+                    return "Sorry, but the name is empty 🤷‍♂️";
+
+                const songs: Track[] = await this.api_client.search_tracks(name, number);
+                const finalSongs: string[]= songs.map((value, index) => `${index+1}. ${value}`);
+
+                return `Here are the ${number} songs found:\n${finalSongs.join('\n')}`;
         
             case 'add_track_to_mid':
                 //Read user file

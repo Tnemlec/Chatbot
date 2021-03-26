@@ -6,6 +6,10 @@ class Track {
         this.name = name;
         this.artistName = artistName;
     }
+
+    public toString(): string {
+        return `${this.name} - ${this.artistName}`;
+    }
 }
 
 export default Track;
