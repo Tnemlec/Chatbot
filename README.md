@@ -38,33 +38,15 @@ So, if you want to use the chatbot at home you will need to follow those steps:
 ![](/screenshots/bye.jpg)
 
 **Top songs:** *number(optional)* best songs from *artist_name*
-- *User*: "What are the 5 best songs from the beatles ?"
-- *Bot*: "Here are the top 5 songs from the beatles:
-    1. Come Together
-    2. Let It Be
-    3. Yesterday
-    4.  Help!
-    5.  Here Comes the Sun"
+![](/screenshots/top_songs.jpg)
 
 **Song search:** *number(optional)* songs that contain *song_name*
 ![](/screenshots/search_songs.jpg)
    
 **Artist search:** *number(optional)* artists that contain *artist_name*
-- *User*: 'Search 5 artists that contain beatles'
-- *Bot*: "Here are the 5 artists found:
-    1. The Beatles
-    2. wu tang vs the beatles
-    3. #1 Beatles Now
-    4. The Beatles Tribute Band
-    5. The Beatles Recovered Band"
+![](/screenshots/search_artists.jpg)
    
 **Adding a recommendation:** add *song_name* - *artist_name* - *score (between 0 to 10)*
-- *User*: 'add Take on Me - a ha - 10'
-- *Bot*: 'Successfully added to your library
-
+![](/screenshots/add.jpg)
 **Recommendation:**
-- *User*: 'recommand'
-- *Bot*: 'I can recommand you:
-1 - Billie Jean by Michael Jackson with a confidence of 88.13052984784633%
-2 - Dancing Queen by ABBA with a confidence of 74.9109503706694%
-3 - Beat It by Michael Jackson with a confidence of 70.50442387827707%'
+![](/screenshots/recommend.jpg)
