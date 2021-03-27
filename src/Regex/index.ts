@@ -4,7 +4,7 @@ import xregexp from 'xregexp';
 import LastFm from '../LastFM';
 import Track from '../LastFM/track';
 
-import fs, { readFile } from 'fs'
+import fs from 'fs'
 import axios, { AxiosResponse } from 'axios';
 
 export default class PatternHandler{
