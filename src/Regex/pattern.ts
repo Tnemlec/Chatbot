@@ -8,10 +8,10 @@ const patternDict = [{
         pattern: '([0-9])? best songs from ([^?]*) ?',
         intent: 'get_n_top_songs'
     },{
-        pattern: '(?<number>\\d*).*(tracks?|songs?|musics?).*(with|contains?)\\s(?<name>.*)',
+        pattern: '(?<number>\\d)? (tracks?|songs?|musics?).*(with|contains?)\\s(?<name>.*)',
         intent: 'search_songs'
     }, {
-        pattern: '(?<number>\\d*).*(creators?|artists?).*(with|contains?)\\s(?<name>.*)',
+        pattern: '(?<number>\\d)? (creators?|artists?).*(with|contains?)\\s(?<name>.*)',
         intent: 'search_artists'
     },{
         pattern: 'add ([^-]*) - ([^-]*) - ([0-9]*)',
