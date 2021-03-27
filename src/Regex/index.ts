@@ -173,7 +173,7 @@ export default class PatternHandler{
                     //Call the API
                     let res: AxiosResponse;
                     try{
-                        res = await axios.post('http://localhost:8000/api/recommand', {user_id: sender_id})
+                        res = await axios.post('http://localhost:8000/api/recommand', {user: users_db[sender_id]})
                     }
                     catch{
                         return "Sorry, your songs doesn't have enough tags 😌"

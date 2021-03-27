@@ -1,1 +1,124 @@
-{"3828312100622217":[{"track_name":"Take on Me","artist_name":"a-ha","score":10,"tags":["80s","pop","new wave","synthpop","synth pop"]},{"track_name":"Hunting High and Low","artist_name":"a-ha","score":10,"tags":["80s","pop","new wave","norwegian"]},{"track_name":"Here Is The House","artist_name":"Depeche Mode","score":10,"tags":["new wave","80s","synthpop","synth pop"]},{"track_name":"Sunglasses at Night","artist_name":"Corey Hart","score":8,"tags":["80s","new wave","pop","80s Pop","rock"]},{"track_name":"Paradise Circus","artist_name":"Massive Attack","score":9,"tags":["trip-hop","electronic","chillout","downtempo","female vocalists"]}],"3682350511826442":[{"track_name":"Rasputin","artist_name":"Boney M.","score":10,"tags":["Disco","70s","pop","80s","dance"]},{"track_name":"Ma Baker","artist_name":"Boney M.","score":10,"tags":["Disco","70s","pop","dance","80s"]},{"track_name":"Don't Stop 'Til You Get Enough","artist_name":"Michael Jackson","score":10,"tags":["pop","Disco","dance","80s","michael jackson"]},{"track_name":"Heart of Glass","artist_name":"Blondie","score":10,"tags":["80s","new wave","pop","Disco","rock"]},{"track_name":"Sunny","artist_name":"Boney M.","score":10,"tags":["Disco","70s","dance","pop","80s"]}]}
+{
+    "3828312100622217": [
+        {
+            "track_name": "Take on Me",
+            "artist_name": "a-ha",
+            "score": 10,
+            "tags": [
+                "80s",
+                "pop",
+                "new wave",
+                "synthpop",
+                "synth pop"
+            ]
+        },
+        {
+            "track_name": "Hunting High and Low",
+            "artist_name": "a-ha",
+            "score": 10,
+            "tags": [
+                "80s",
+                "pop",
+                "new wave",
+                "norwegian"
+            ]
+        },
+        {
+            "track_name": "Here Is The House",
+            "artist_name": "Depeche Mode",
+            "score": 10,
+            "tags": [
+                "new wave",
+                "80s",
+                "synthpop",
+                "synth pop"
+            ]
+        },
+        {
+            "track_name": "Sunglasses at Night",
+            "artist_name": "Corey Hart",
+            "score": 8,
+            "tags": [
+                "80s",
+                "new wave",
+                "pop",
+                "80s Pop",
+                "rock"
+            ]
+        },
+        {
+            "track_name": "Paradise Circus",
+            "artist_name": "Massive Attack",
+            "score": 9,
+            "tags": [
+                "trip-hop",
+                "electronic",
+                "chillout",
+                "downtempo",
+                "female vocalists"
+            ]
+        }
+    ],
+    "3682350511826442": [
+        {
+            "track_name": "Rasputin",
+            "artist_name": "Boney M.",
+            "score": 10,
+            "tags": [
+                "Disco",
+                "70s",
+                "pop",
+                "80s",
+                "dance"
+            ]
+        },
+        {
+            "track_name": "Ma Baker",
+            "artist_name": "Boney M.",
+            "score": 10,
+            "tags": [
+                "Disco",
+                "70s",
+                "pop",
+                "dance",
+                "80s"
+            ]
+        },
+        {
+            "track_name": "Don't Stop 'Til You Get Enough",
+            "artist_name": "Michael Jackson",
+            "score": 10,
+            "tags": [
+                "pop",
+                "Disco",
+                "dance",
+                "80s",
+                "michael jackson"
+            ]
+        },
+        {
+            "track_name": "Heart of Glass",
+            "artist_name": "Blondie",
+            "score": 10,
+            "tags": [
+                "80s",
+                "new wave",
+                "pop",
+                "Disco",
+                "rock"
+            ]
+        },
+        {
+            "track_name": "Sunny",
+            "artist_name": "Boney M.",
+            "score": 10,
+            "tags": [
+                "Disco",
+                "70s",
+                "dance",
+                "pop",
+                "80s"
+            ]
+        }
+    ]
+}

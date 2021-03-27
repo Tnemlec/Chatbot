@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 import json
 import pandas as pd
 import math
+import os
+basePath = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__)
 
@@ -9,7 +11,7 @@ app = Flask(__name__)
 def index():
     #Check if all necessary data has been passed on
     try:
-        user_id = request.json['user_id']
+        user = request.json['user']
     except:
         return 'Bad request, user id is mandatory', 400
             
@@ -18,8 +20,8 @@ def index():
     except:
         n = 3
     
-    if(user_id and user_id != ''):
-        recommandation = recommand(user_id, int(n))
+    if(user and user != ''):
+        recommandation = recommand(user, int(n))
         if(recommandation):
             return json.dumps({'recommandation':recommandation}), 200, {'ContentType':'application/json'} 
         else:
@@ -56,21 +58,17 @@ def square(vector):
     return math.sqrt(res)
 
 
-def recommand(user_id, n):
+def recommand(user, n):
     #You can find this code detailed in the jupyter notebook
     #Get all the data
-    songs = pd.read_json('./recommandation/tracks_tag.json')
-
-    with open('./src/userdatabase.json') as f:
-        data = json.load(f)
+    songs = pd.read_json(basePath + '/tracks_tag.json')
 
     header = ['user_id', 'track_name', 'artist_name', 'score', 'tags']
-    user = []
+    data = []
+    for song in user:
+        data.append([0, song['track_name'], song['artist_name'], song['score'], song['tags']])
 
-    for song in data[user_id]:
-        user.append([user_id, song['track_name'], song['artist_name'], song['score'], song['tags']])
-
-    user = pd.DataFrame(user, columns=header)
+    user = pd.DataFrame(data, columns=header)
 
     #Get all genre
     all_genre = set()
