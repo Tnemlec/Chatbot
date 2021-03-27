@@ -1,9 +1,8 @@
 import express from 'express';
-import lastfm from './LastFM/index';
-import FBManager from './FBManager/index';
+import lastfm from './LastFM';
+import FBManager from './FBManager';
 import dotenv from 'dotenv';
-import PatternHandler from './Regex/index'
-import Track from './LastFM/track';
+import PatternHandler from './Regex'
 
 const server = express();
 const PORT = 3000;

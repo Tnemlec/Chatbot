@@ -1,7 +1,7 @@
 import pattern from './pattern';
 import xregexp from 'xregexp';
 
-import LastFm from '../LastFM/index';
+import LastFm from '../LastFM';
 import Track from '../LastFM/track';
 
 import fs, { readFile } from 'fs'
