@@ -6,6 +6,7 @@
   "scripts": {
     "start:build": "tsc -w",
     "start:run": "nodemon build/app.js",
+    "start:api": "py recommandation/app.py",
     "start": "concurrently npm:start:*"
   },
   "repository": {
