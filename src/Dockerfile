@@ -1,0 +1,6 @@
+FROM node:10-alpine
+WORKDIR /app
+COPY . .
+RUN npm install
+
+CMD ["node", "build/app.js"]
